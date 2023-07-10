@@ -1,0 +1,25 @@
+import React from 'react';
+import { connect } from 'react-redux';
+//import { actionCreators } from '../store';
+import { remove } from "../store";
+import { Link } from 'react-router-dom';
+
+function ToDo({text, id, onBtnClick}){
+    return(
+        <li>
+            <Link to={`/${id}`}>
+                {text} 
+            </Link>
+            <button onClick={onBtnClick}>DEL</button>
+        </li>
+    );
+}
+
+function mapDispatchToProps(dispatch, ownProps) {
+    console.log(ownProps); // have props of added array element.
+    return{
+        onBtnClick: () => dispatch(remove(ownProps.id))
+    }
+}
+
+export default connect(null, mapDispatchToProps) (ToDo);
